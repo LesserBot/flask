@@ -1,0 +1,26 @@
+<h3>6면 바코드 인식 컨베이어시스템 - 삑그리고 다음 팀</h3>
+<h3>분류된 운송장 정보 현황</h3>
+    <div>
+      
+      <table class="table">
+          <thead>
+          <tr align ="center">
+              <th scope="col">번호</th>
+              <th scope="col">코드</th>
+              <th scope="col">배달지역</th>
+              <th scope="col">품목</th>                   
+          </tr>
+          </thead>
+          <tbody> 
+            {% for row in value %}  
+                <tr align ="center"> 
+                    <td>{{row[0]}}</td> 
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td> 
+                    <td>{{row[3]}}</td>
+                </tr> 
+            {% endfor %} 
+              </tobody>
+      </table>
+      
+  </div>     
