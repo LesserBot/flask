@@ -5,14 +5,12 @@
 import pymysql
 from flask import Flask, render_template
 import threading
-
-
-
+import time
 
 data1=''
 data2=''
-app = Flask(__name__)
 
+app = Flask(__name__)
 # DB연동
 conn = pymysql.connect(host="localhost", user="root", \
                        password="krg0318",db="data",charset="utf8")
@@ -76,55 +74,34 @@ def create(id):
         curs.execute("select * from datas")
         data1= curs.fetchall()
         data2= ''
-        page=1
+
     elif id == 2:
         site = "id2.html"  
         curs.execute("select * from input")
         data1= curs.fetchall()
         data2= ''
-        page=2
-    else:
-        site = "id3.html"
-        curs.execute("select * from datas")
-        data1= curs.fetchall()
-        curs.execute("select * from input")
-        data2= curs.fetchall()
-        page=3
-    return template2(render_template("home2.html"),getContents(),render_template(site, value=data1 , value2=data2) ), page
 
-def reload(page):
-    if page == 1:
-        site = "id1.html"
-        curs.execute("select * from datas")
-        data1= curs.fetchall()
-        data2= ''
-    elif page == 2:
-        site = "id2.html"  
-        curs.execute("select * from input")
-        data1= curs.fetchall()
-        data2= ''
     else:
         site = "id3.html"
         curs.execute("select * from datas")
-        data1= curs.fetchall()
-        curs.execute("select * from input")
         data2= curs.fetchall()
+        curs.execute("select * from input")
+        data1= curs.fetchall()
+
     return template2(render_template("home2.html"),getContents(),render_template(site, value=data1 , value2=data2) )
 
-        
+      
     
-def flask_run():
-    app.run(host='0.0.0.0', port=9900, debug=True)
+# def flask_run():
+#     app.run(host='0.0.0.0', port=9900, debug=True)  
 
-#def abd():
-  #  print("이거 돌고있다.")
-       
 ######### 쓰레드 제어 
 if __name__ == '__main__':
-    thread1= threading.Thread(target=flask_run)
-    #thread= threading.Thread(target=abd)
-    #thread.start()
-    thread1.start()
+    app.run(host='0.0.0.0', port=9900, debug=True)  
+    # thread1= threading.Thread(target=flask_run)
+    # # #thread= threading.Thread(target=abd)
+    # # #thread.start()
+    # /thread1.start()
 
 
     
